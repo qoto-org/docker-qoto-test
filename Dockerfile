@@ -31,31 +31,8 @@ RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A170311380
 RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 RUN apt-get install -y nodejs && npm install -g yarn
 
-# Install rvm
-COPY ./qoto/.ruby-version .ruby-version
-RUN read RUBY_VERSION < .ruby-version
-RUN rm .ruby-version
-RUN curl -sSL https://raw.githubusercontent.com/rvm/rvm/stable/binscripts/rvm-installer | bash -s stable --ruby=$RUBY_VERSION
-COPY rvm-reinstall.sh rvm-reinstall.sh
-RUN bash rvm-reinstall.sh && rm rvm-reinstall.sh
-
 # Configure database
 RUN /etc/init.d/postgresql restart &&  /etc/init.d/postgresql status && sudo -u postgres createuser -U postgres vagrant -s && sudo -u postgres createuser -U postgres root -s && sudo -u postgres createdb -U postgres mastodon_development
-
-# Install gems and node modules
-#RUN gem install bundler foreman
-#RUN bundle install
-#RUN yarn install
-
-#RUN apt remove cmdtest yarn -y && apt-get install npm -y && npm install -g yarn
-#RUN apt-get install npm -y && npm install -g yarn
-
-#RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
-#RUN echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
-#RUN echo "deb https://nightly.yarnpkg.com/debian/ nightly main" | tee /etc/apt/sources.list.d/yarn.list
-#RUN apt-get install yarn -y
-
-#RUN update-rc.d postgresql enable
 
 # Run the command on container startup
 EXPOSE 3000
