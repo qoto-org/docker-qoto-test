@@ -6,4 +6,4 @@ This will determine what version of ruby the mastodon repo needs, install it int
 
 You can then run this within the container to generate an admin user:
 
-RAILS_ENV=production bin/tootctl accounts create dev --email dev@mastodon.local --confirmed --role admin
+source /usr/local/rvm/scripts/rvm && RAILS_ENV=production bin/tootctl accounts create dev --email dev@mastodon.local --confirmed --role admin
