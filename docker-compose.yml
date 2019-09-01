@@ -1,7 +1,7 @@
 version: '2'
 services:
   mastodon-bots:
-    image: 'qotoorg/qoto-test:1'
+    image: 'qotoorg/qoto-test:latest'
     build: .
     ports:
       - "3000:3000"
