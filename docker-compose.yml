@@ -1,0 +1,9 @@
+version: '2'
+services:
+  mastodon-bots:
+    image: 'qotoorg/qoto-test:1'
+    build: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - './qoto:/qoto'
